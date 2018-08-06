@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class FragB extends Fragment{
+public class FragB extends Fragment implements View.OnClickListener{
     String TAG = "LifeCycle";
     FragResponse response;
     Button btnFragA,btnFragB,btnFragC;
@@ -33,24 +33,9 @@ public class FragB extends Fragment{
         btnFragB = rootView.findViewById(R.id.btnfragB);
         btnFragC = rootView.findViewById(R.id.btnfragC);
         response = (FragResponse)getContext();
-        btnFragA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                response.onfragClick(view);
-            }
-        });
-        btnFragB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                response.onfragClick(view);
-            }
-        });
-        btnFragC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                response.onfragClick(view);
-            }
-        });
+        btnFragA.setOnClickListener(this);
+        btnFragB.setOnClickListener(this);
+        btnFragC.setOnClickListener(this);
         return rootView;
     }
 
@@ -100,5 +85,11 @@ public class FragB extends Fragment{
     public void onDestroyView() {
         super.onDestroyView();
         Log.d(TAG, "Frag B onDestroyView()");
+    }
+
+    @Override
+    public void onClick(View view) {
+        Log.d(TAG, "Frag B onClick()");
+        response.onFragClick(view);
     }
 }

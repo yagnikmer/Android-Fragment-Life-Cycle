@@ -7,6 +7,6 @@ import android.view.View;
  */
 
 public interface FragResponse {
-    void onfragClick(View View);
+    void onFragClick(View View);
     void onfragBack(int responseCode);
 }

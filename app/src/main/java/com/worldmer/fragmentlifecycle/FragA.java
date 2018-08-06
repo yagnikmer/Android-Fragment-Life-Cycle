@@ -9,10 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class FragA extends Fragment{
+public class FragA extends Fragment implements View.OnClickListener {
     String TAG = "LifeCycle";
     FragResponse response;
-    Button btnFragA,btnFragB,btnFragC;
+    Button btnFragA, btnFragB, btnFragC;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -28,29 +29,14 @@ public class FragA extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "Frag A onCreateView()");
-        View rootView = inflater.inflate(R.layout.frag_a,container,false);
+        View rootView = inflater.inflate(R.layout.frag_a, container, false);
         btnFragA = rootView.findViewById(R.id.btnfragA);
         btnFragB = rootView.findViewById(R.id.btnfragB);
         btnFragC = rootView.findViewById(R.id.btnfragC);
-        response = (FragResponse)getContext();
-        btnFragA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                response.onfragClick(view);
-            }
-        });
-        btnFragB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                response.onfragClick(view);
-            }
-        });
-        btnFragC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                response.onfragClick(view);
-            }
-        });
+        response = (FragResponse) getContext();
+        btnFragA.setOnClickListener(this);
+        btnFragB.setOnClickListener(this);
+        btnFragC.setOnClickListener(this);
         return rootView;
     }
 
@@ -102,10 +88,10 @@ public class FragA extends Fragment{
         Log.d(TAG, "Frag A onDestroyView()");
     }
 
+
+    @Override
     public void onClick(View view) {
+        response.onFragClick(view);
         Log.d(TAG, "Frag A onClick()");
-//        startActivity(new Intent(this, SecondActivity.class));
     }
-
-
 }

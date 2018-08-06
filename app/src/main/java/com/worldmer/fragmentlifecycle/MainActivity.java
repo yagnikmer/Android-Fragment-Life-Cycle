@@ -9,12 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, FragResponse {
 
     Button btnFragA, btnFragB, btnFragC;
-    String TAG = "ActivityLifeCycle";
+    String TAG = "LifeCycle";
     FragA fragA;
     FragB fragB;
 
@@ -22,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d(TAG, "ACT onCreate()");
         btnFragA = (Button) findViewById(R.id.btnfragA);
         btnFragB = (Button) findViewById(R.id.btnfragB);
         btnFragC = (Button) findViewById(R.id.btnfragC);
@@ -30,55 +29,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnFragC.setOnClickListener(this);
         fragA = new FragA();
         fragB = new FragB();
-        Log.d(TAG, "ACT A onCreate()");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d(TAG, "ACT A onStart()");
+        Log.d(TAG, "ACT onStart()");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG, "ACT A onResume()");
+        Log.d(TAG, "ACT onResume()");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(TAG, "ACT A onPause()");
+        Log.d(TAG, "ACT onPause()");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(TAG, "ACT A onStop()");
+        Log.d(TAG, "ACT onStop()");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d(TAG, "ACT A onRestart()");
+        Log.d(TAG, "ACT onRestart()");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "ACT A onDestroy()");
+        Log.d(TAG, "ACT onDestroy()");
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Log.d(TAG, "ACT A onBackPressed()");
+        Log.d(TAG, "ACT onBackPressed()");
     }
 
     @Override
     public void onClick(View view) {
-        Log.d(TAG, "ACT A onClick()");
-
+        Log.d(TAG, "ACT onClick()");
         switch (view.getTag().toString()) {
             case "A":
                 getSupportActionBar().setTitle("Fragment A");
@@ -100,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(android.R.id.content, fragment);
         transaction.commit();
-        Log.d("TAG1122","Size : REPLACE " +manager.getFragments().size());
     }
 
     public void addFragment(Fragment fragment) {
@@ -108,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(android.R.id.content, fragment);
         transaction.commit();
-        Log.d("TAG1122","Size : ADD " +manager.getFragments().size());
     }
 
     public void removeFragment(Fragment fragment) {
@@ -116,17 +111,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.remove(fragment);
         transaction.commit();
-        Log.d("TAG1122","Size : REMOVE " +manager.getFragments().size());
     }
 
-    public void getCount()
-    {
-
-    }
     @Override
-    public void onfragClick(View view) {
-        Log.d(TAG, "ACT A onClick()");
-
+    public void onFragClick(View view) {
+        Log.d(TAG, "ACT onFragClick()");
         switch (view.getTag().toString()) {
             case "A":
                 getSupportActionBar().setTitle("Fragment A");
